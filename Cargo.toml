@@ -1,0 +1,14 @@
+[package]
+name = "shinemonitor"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0.143", features = ["derive"] }
+rust-crypto = "^0.2"
+[dev-dependencies]
+tokio-test = "0.4.2"
+dotenv = "0.15.0"
