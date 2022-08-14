@@ -1,6 +1,6 @@
 [package]
 name = "shinemonitor"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["fnxln <lin@fnxln.com>"]
 description = "Rust library for the shinemonitor.com website"
