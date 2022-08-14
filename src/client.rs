@@ -35,14 +35,7 @@ impl Default for ShineMonitorClient {
 }
 
 impl ShineMonitorClient {
-    // Creates a new ShineMonitorClient client with a custom host url
-    //
-    // # Examples
-    //
-    //```rust
-    // use shinemonitor::ShinemonitorClient;
-    // let client = Shinemonitorclient::new("Url of api");
-    //```
+    /// Creates a new ShineMonitorClient client with a custom host url
     pub fn new(host: &'static str) -> Self {
         ShineMonitorClient { host }
     }
@@ -53,18 +46,7 @@ impl ShineMonitorClient {
             .json()
             .await
     }
-    // Check API server status
-    //
-    // # Examples
-    //
-    // ```rust
-    // #[tokio::main]
-    // async fn main() {
-    //     use shinemonitor::ShinemonitorClient;
-    //     let client = ShineMonitor::default();
-    //     client.ping().await;
-    // }
-    // ```
+    /// Check API server status
     pub async fn ping(&self) -> Result<SimplePing, Error> {
         self.get("/").await
     }
@@ -81,18 +63,7 @@ impl ShineMonitorClient {
         format!("/?sign={}&salt={}{}", sign, salt, action)
     }
 
-    // Auth with the api
-    //
-    // # Example
-    //```rust
-    //    #[tokio::main]
-    //    async fn main() {
-    //     use shinemonitor::ShinemonitorClient;
-    //     let client = ShineMonitor::default();
-    //     let res = client.auth("johnsmith","supersecurepassword").await;
-    //     println!("The token of {} is {}", res.dat.usr,res.dat.token)
-    // }
-    //```
+    /// Auth with the api
     pub async fn auth(&self, user: &str, pass: &str) -> Result<Auth, Error> {
         //	println!("URL: {}", self.auth_url(user,pass).as_str());
         self.get(self.auth_url(user, pass).as_str()).await
@@ -110,23 +81,9 @@ impl Auth {
             BASE_URL, sign, sal, token, action
         )
     }
-    // Get the plantid
-    //
-    // # Example
-    //```rust
-    //    #[tokio::main]
-    //    async fn main() {
-    //     use shinemonitor::ShinemonitorClient;
-    //     let client = ShineMonitor::default();
-    //     let res = client.auth("johnsmith","supersecurepassword")
-    //             .await?
-    //             .pid()
-    //             .pid;
-    //     println!("The token of {} is {}", res.dat.usr,res.dat.token)
-    // }
-    //```
 
-    pub async fn pid(&self) -> Result<Pid, Error> {
+    /// Get the plantid
+     pub async fn pid(&self) -> Result<Pid, Error> {
         //println!("{}",self.pid_url());
         reqwest::get(self.pid_url().as_str()).await?.json().await
     }
@@ -153,6 +110,8 @@ impl Auth {
             BASE_URL, sign, sal, token, action
         )
     }
+
+    /// Get Plant Info
     pub async fn plant(&self) -> Result<Plant, Error> {
         let plant_url = self.plant_url().await;
         let res = reqwest::get(plant_url).await?.json().await;
@@ -188,6 +147,7 @@ impl Auth {
         )
     }
 
+    /// Get solar info
     pub async fn solar(&self) -> Result<Solar, Error> {
         let url = self.solar_url().await;
         reqwest::get(url)
@@ -195,6 +155,5 @@ impl Auth {
             .expect("Could not get solar data")
             .json()
             .await
-
     }
 }
