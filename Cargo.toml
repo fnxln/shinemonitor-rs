@@ -2,6 +2,12 @@
 name = "shinemonitor"
 version = "0.1.0"
 edition = "2021"
+authors = ["fnxln <lin@fnxln.com>"]
+description = "Rust library for the shinemonitor.com website"
+repository = "https://github.com/fnxln/shinemonitor-rs"
+keywords = ["api","solar","iot"]
+license = "MIT"
+include = ["src/**/*", "LICENSE.md", "README.md", "CHANGELOG.md"]
 
 
 [dependencies]
